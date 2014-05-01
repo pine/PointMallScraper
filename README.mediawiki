@@ -1,0 +1,23 @@
+= Point Mall Scraper =
+
+This is a web scraping tool to get shop data in JSON format from credit card point mall.<br />
+これは、クレジットカードのポイントモールからショップ一覧を JSON 形式で取得するためのスクレイピングツールです。
+
+This app has forked from [https://github.com/pine613/OricoMallShopList OricoMallShopList].<br />
+このアプリケーションは、[https://github.com/pine613/OricoMallShopList OricoMallShopList] からフォークしました。
+
+== Development environment ==
+* Visual Studio 2013
+* C# / .NET Framework 4.5 / WPF
+
+== License ==
+* MIT License
+* Copyright &copy; 2014 MIZUNE Pine.
+
+== See also ==
+The application is a tool to generate the data of shops used by the following chrome extension.<br />
+このアプリケーションは、以下の Chrome 拡張機能で利用するショップ情報を生成するツールです。
+* https://github.com/pine613/OricoExtention
+
+== Links ==
+* http://www.oricomall.com
