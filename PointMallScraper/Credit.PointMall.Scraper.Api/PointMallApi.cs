@@ -6,6 +6,7 @@ using System.Timers;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Net.Http;
 
 namespace Credit.PointMall.Scraper.Api
 {
@@ -19,6 +20,7 @@ namespace Credit.PointMall.Scraper.Api
 
         private bool TimeoutEnabled { get; set; }
         private MovedListener NextDelegate { get; set; }
+        private LoadCompleteChecker CompleteCheckerDelegate { get; set; }
         private bool ReadyStateRedirect { get; set; }
         private bool ReadyStateCompleted { get; set; }
         private bool ReadyStateUrlCheck { get; set; }
@@ -34,6 +36,8 @@ namespace Credit.PointMall.Scraper.Api
         public EventHandler<List<Shop>> Ended = (o, v) => { };
 
         public delegate void MovedListener(bool isTimeout);
+        public delegate void JsonLoadedListener(dynamic json);
+        public delegate bool LoadCompleteChecker();
 
         public PointMallApi()
         {
@@ -43,6 +47,7 @@ namespace Credit.PointMall.Scraper.Api
 
             this.TimeoutEnabled = false;
             this.NextDelegate = null;
+            this.CompleteCheckerDelegate = null;
             this.ReadyStateRedirect = false;
             this.ReadyStateCompleted = false;
             this.ReadyStateUrlCheck = false;
@@ -92,7 +97,8 @@ namespace Credit.PointMall.Scraper.Api
             string url = null,
             bool isRedirect = false,
             bool isCompletedTiming = false,
-            bool isUrlCheck = false
+            bool isUrlCheck = false,
+            LoadCompleteChecker useCheckDelegate = null
             )
         {
             // 移動後に実行する処理
@@ -101,6 +107,7 @@ namespace Credit.PointMall.Scraper.Api
             this.ReadyStateCompleted = isCompletedTiming;
             this.ReadyStateUrlCheck = isUrlCheck;
             this.ReadyStateUrl = url;
+            this.CompleteCheckerDelegate = useCheckDelegate;
 
             // タイムアウトが有効な場合
             if (this.TimeoutEnabled)
@@ -120,6 +127,22 @@ namespace Credit.PointMall.Scraper.Api
             {
                 this.ReadyStateTimer.Start();
             }
+        }
+
+        protected async void GetJson(JsonLoadedListener listener, string url)
+        {
+            var http = new HttpClient();
+            var response = await http.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+
+                listener(Codeplex.Data.DynamicJson.Parse(content));
+                return;
+            }
+
+            listener(null);
         }
         
         protected mshtml.HTMLDocument Document
@@ -151,8 +174,9 @@ namespace Credit.PointMall.Scraper.Api
                 if (this.Browser.Source != null)
                 {
                     var url = this.Browser.Source.AbsoluteUri;
+                    var httpsUrl = this.RedirectCheckUrl.Replace("http://", "https://");
 
-                    if (!url.StartsWith(this.RedirectCheckUrl))
+                    if (!url.StartsWith(this.RedirectCheckUrl) && !url.StartsWith(httpsUrl))
                     {
                         return true;
                     }
@@ -208,6 +232,8 @@ namespace Credit.PointMall.Scraper.Api
             // デリゲートを呼び出す
             Action callDelegate = () =>
             {
+                this.ReadyStateTimer.Stop();
+
                 if (this.NextDelegate != null && !this.ReadyStateCompleted)
                 {
                     // 一度変数に格納しないと null が代入できない
@@ -244,6 +270,7 @@ namespace Credit.PointMall.Scraper.Api
                                 (!this.ReadyStateRedirect || this.CheckRedirectEnded()) &&
                                 (!this.ReadyStateUrlCheck || this.CheckUrl()))
                             {
+                                // DOMContentLoaded 判定
                                 try
                                 {
                                     ((mshtml.IHTMLElement2)document.documentElement).doScroll("left");
@@ -253,7 +280,15 @@ namespace Credit.PointMall.Scraper.Api
                                     return;
                                 }
 
-                                this.ReadyStateTimer.Stop();
+                                // 終了チェックデリゲートが有効な場合
+                                if (this.CompleteCheckerDelegate != null)
+                                {
+                                    // 非終了判定
+                                    if (!this.CompleteCheckerDelegate())
+                                    {
+                                        return;
+                                    }
+                                }
 
                                 callDelegate();
                             }
@@ -272,6 +307,15 @@ namespace Credit.PointMall.Scraper.Api
             {
                 if (this.NextDelegate != null)
                 {
+                    if (this.CompleteCheckerDelegate != null)
+                    {
+                        // 非終了判定
+                        if (!this.CompleteCheckerDelegate())
+                        {
+                            return;
+                        }
+                    }
+
                     var next = this.NextDelegate;
                     this.NextDelegate = null;
 

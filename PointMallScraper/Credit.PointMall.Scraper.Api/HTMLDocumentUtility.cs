@@ -20,6 +20,21 @@ namespace Credit.PointMall.Scraper.Base
             return results;
         }
 
+        public static mshtml.IHTMLElement getElementByName(
+            this mshtml.HTMLDocument document,
+            string name
+            )
+        {
+            var elements = document.getElementsByName(name);
+
+            if (elements.length > 0)
+            {
+                return (mshtml.IHTMLElement)elements.item(index: 0);
+            }
+
+            return null;
+        }
+
         public static List<mshtml.IHTMLElement> getElementsByClassName(
             this mshtml.HTMLDocument document,
             string className
@@ -42,6 +57,21 @@ namespace Credit.PointMall.Scraper.Base
             }
 
             return results;
+        }
+
+        public static mshtml.IHTMLElement getElementByClassName(
+            this mshtml.HTMLDocument document,
+            string className
+            )
+        {
+            var elements = document.getElementsByClassName(className);
+
+            if (elements.Count > 0)
+            {
+                return elements[0];
+            }
+
+            return null;
         }
 
         public static List<mshtml.IHTMLElement> getElementsByTagName(
