@@ -11,7 +11,8 @@ using System.Runtime.Serialization;
 namespace Credit.PointMall.Scraper.Api
 {
     /// <summary>
-    /// オリコモールへアクセスし情報を取得するクラス
+    /// イオンカードのポイントモール、
+    /// ときめきポイントタウンへアクセスし情報を取得するクラス
     /// </summary>
     public class TokimekiPointTownApi : PointMallApi
     {
