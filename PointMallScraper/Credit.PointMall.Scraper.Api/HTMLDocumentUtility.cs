@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Credit.PointMall.Scraper.Base
+namespace Credit.PointMall.Scraper.Api
 {
     static class HTMLDocumentUtility
     {
@@ -88,7 +88,7 @@ namespace Credit.PointMall.Scraper.Base
         }
 
         public static bool attachEvent(
-            this mshtml.IHTMLElement element, string @event, 
+            this mshtml.IHTMLElement element, string @event,
             DomEventHandler.Callback callback
             )
         {

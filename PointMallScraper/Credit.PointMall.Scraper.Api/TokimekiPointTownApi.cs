@@ -6,7 +6,6 @@ using System.Timers;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-using Credit.PointMall.Scraper.Base;
 using System.Runtime.Serialization;
 
 namespace Credit.PointMall.Scraper.Api

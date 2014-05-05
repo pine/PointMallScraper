@@ -12,7 +12,7 @@ namespace Credit.PointMall.Scraper.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,24 +26,24 @@ namespace Credit.PointMall.Scraper.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UserName {
+        public string UserName_Orico {
             get {
-                return ((string)(this["UserName"]));
+                return ((string)(this["UserName_Orico"]));
             }
             set {
-                this["UserName"] = value;
+                this["UserName_Orico"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Password {
+        public string Password_Orico {
             get {
-                return ((string)(this["Password"]));
+                return ((string)(this["Password_Orico"]));
             }
             set {
-                this["Password"] = value;
+                this["Password_Orico"] = value;
             }
         }
         
@@ -80,6 +80,30 @@ namespace Credit.PointMall.Scraper.Properties {
             }
             set {
                 this["Timeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserName_Aeon {
+            get {
+                return ((string)(this["UserName_Aeon"]));
+            }
+            set {
+                this["UserName_Aeon"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Password_Aeon {
+            get {
+                return ((string)(this["Password_Aeon"]));
+            }
+            set {
+                this["Password_Aeon"] = value;
             }
         }
     }

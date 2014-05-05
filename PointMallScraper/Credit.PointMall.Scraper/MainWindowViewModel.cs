@@ -20,7 +20,7 @@ namespace Credit.PointMall.Scraper
             this.Save = new DelegateCommand(this.SaveCommand);
         }
 
-        private string userName = Properties.Settings.Default.UserName;
+        private string userName = "";
 
         /// <summary>
         /// ユーザー名
@@ -36,11 +36,42 @@ namespace Credit.PointMall.Scraper
                 this.userName = value;
                 this.OnPropertyChanged("UserName");
 
-                Task.Run(() =>
+                if (this.SelectedPointMall != null)
                 {
-                    Properties.Settings.Default.UserName = value;
-                    Properties.Settings.Default.Save();
-                });
+                    Task.Run(() =>
+                    {
+                        this.SaveSettingUserName(value);
+                        Properties.Settings.Default.Save();
+
+                    });
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 設定に保存されたユーザー名を取得する
+        /// </summary>
+        /// <returns></returns>
+        private string LoadSettingUserName()
+        {
+            if (this.SelectedPointMall != null)
+            {
+                return SettingUtility.LoadSettingUserName(this.SelectedPointMall.Id);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 設定にユーザー名を保存する
+        /// </summary>
+        /// <returns></returns>
+        private void SaveSettingUserName(string userName)
+        {
+            if (this.SelectedPointMall != null)
+            {
+                SettingUtility.SaveSettingUserName(this.SelectedPointMall.Id, userName);
             }
         }
 
@@ -300,7 +331,9 @@ namespace Credit.PointMall.Scraper
             set
             {
                 this.selectedPointMall = value;
+                this.userName = this.LoadSettingUserName();
                 this.OnPropertyChanged("SelectedPointMall");
+                this.OnPropertyChanged("UserName");
             }
         }   
      

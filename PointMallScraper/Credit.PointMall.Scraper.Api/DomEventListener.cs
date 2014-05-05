@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
-namespace Credit.PointMall.Scraper
+namespace Credit.PointMall.Scraper.Api
 {
     /// <summary>
     /// EventHandler - adaptor to call C# back from JavaScript or DOM event handlers
     /// </summary>
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.AutoDispatch)]
-    class DomEventHandler
+    public class DomEventHandler
     {
         [ComVisible(false)]
         public delegate bool Callback(object[] args);

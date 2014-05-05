@@ -6,7 +6,6 @@ using System.Timers;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-using Credit.PointMall.Scraper.Base;
 
 namespace Credit.PointMall.Scraper.Api
 {
@@ -228,8 +227,8 @@ namespace Credit.PointMall.Scraper.Api
 
                 var loginButton = this.Document.getElementById("connectLogin");
 
-                captcha.attachEvent("onkeypress", (args) =>
-                {
+                
+                captcha.attachEvent("onkeypress", (args) => {
                     const int ENTER_KEY = 13;
 
                     var e = args[0] as mshtml.IHTMLEventObj;

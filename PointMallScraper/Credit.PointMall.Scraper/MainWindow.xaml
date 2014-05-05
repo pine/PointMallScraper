@@ -6,8 +6,7 @@
         Title="Credit Point Mall Scraper"
         Width="{Binding WindowWidth}"
         Height="{Binding WindowHeight}"
-        x:Name="mainWindow"
-        Loaded="mainWindow_Loaded">
+        x:Name="mainWindow">
 
     <Window.Resources>
         <Style x:Key="textInput">
@@ -49,7 +48,7 @@
 
                 <ComboBox x:Name="listBoxCardName"
                           ItemsSource="{Binding PointMalls}"
-                          SelectedItem="{Binding SelectedPointMall}"/>
+                          SelectedItem="{Binding SelectedPointMall}" SelectionChanged="listBoxCardName_SelectionChanged"/>
                 
                 <Label Target="{Binding ElementName=textBoxUserName}"
                        Margin="10,0,0,0">

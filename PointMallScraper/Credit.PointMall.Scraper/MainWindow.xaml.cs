@@ -44,16 +44,38 @@ namespace Credit.PointMall.Scraper
         {
             var passwordBox = (PasswordBox)sender;
 
-            await Task.Run(() =>
+            if (this.SelectedPointMall != null)
             {
-                Properties.Settings.Default.Password = passwordBox.Password;
-                Properties.Settings.Default.Save();
-            });
+                await Task.Run(() =>
+                {
+                    SettingUtility.SaveSettingPassword(
+                        this.SelectedPointMall.Id, passwordBox.Password);
+
+                    Properties.Settings.Default.Save();
+                });
+            }
         }
 
-        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void listBoxCardName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.passwordBox.Password = Properties.Settings.Default.Password;
+            if (this.SelectedPointMall != null)
+            {
+                var password = SettingUtility.LoadSettingPassword(
+                    this.SelectedPointMall.Id);
+
+                this.passwordBox.Password = password;
+            }
+        }
+
+        private Api.PointMall SelectedPointMall
+        {
+            get
+            {
+                return this.Dispatcher.Invoke(() =>
+                {
+                    return ((MainWindowViewModel)this.DataContext).SelectedPointMall;
+                });
+            }
         }
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="IMainWindow.cs" />
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="SettingUtility.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WebBrowserUtility.cs" />
     <Page Include="MainWindow.xaml">
