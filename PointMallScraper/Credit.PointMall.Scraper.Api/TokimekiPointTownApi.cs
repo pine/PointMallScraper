@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using System.Timers;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.Serialization;
 
 namespace Credit.PointMall.Scraper.Api
 {
