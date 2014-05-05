@@ -26,13 +26,6 @@ namespace Credit.PointMall.Scraper.Api
         private List<Shop> ShopLinks { get; set; }
         private int ShopInfoIndex { get; set; }
 
-        [DataContract]
-        public class JsonShopInfo
-        {
-            [DataMember(Name = "name")]
-            public string Name { get; set; }
-        }
-
         public TokimekiPointTownApi()
             : base()
         {
