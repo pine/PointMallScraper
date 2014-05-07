@@ -13,7 +13,7 @@ namespace Credit.PointMall.Scraper.Api
         private const string TokimekiPointTownTopUrl = "http://www.aeon.co.jp/tpt/";
         private const string TokimekiPointTownShopListUrl = "http://www.aeon.co.jp/tpt/shared/shop_list.json";
         private const string TokimekiPointTownShopUrl = "https://www.aeon.co.jp/tpt/shop/{0}/index.html";
-        private const string TokimekiPointTownRedirectCheckUrl = "https://www.aeon.co.jp/tpt/";
+        private const string TokimekiPointTownRedirectCheckUrl = "https://www.aeon.co.jp/";
 
         private List<Shop> ShopInfoLinks { get; set; }
         private List<Shop> ShopLinks { get; set; }
