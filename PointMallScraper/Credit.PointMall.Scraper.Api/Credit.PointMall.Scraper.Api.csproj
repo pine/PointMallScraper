@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DynamicJson.cs" />
+    <Compile Include="PointUpMall.cs" />
     <Compile Include="TokimekiPointTownApi.cs" />
     <Compile Include="PointMall.cs" />
     <Compile Include="DomEventListener.cs" />

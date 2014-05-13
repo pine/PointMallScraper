@@ -12,7 +12,8 @@ namespace Credit.PointMall.Scraper.Api
         {
             return new[]{
                 new PointMall("Orico", typeof(OricoMallApi), "オリコ"),
-                new PointMall("Aeon", typeof(TokimekiPointTownApi), "イオン")
+                new PointMall("Aeon", typeof(TokimekiPointTownApi), "イオン"),
+                new PointMall("Smbc", typeof(PointUpMall), "三井住友")
             };
         }
 
