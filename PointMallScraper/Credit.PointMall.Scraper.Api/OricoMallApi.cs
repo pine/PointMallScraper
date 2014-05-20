@@ -47,7 +47,7 @@ namespace Credit.PointMall.Scraper.Api
             // タイムアウト
             if (isTimeout)
             {
-                this.Failure(this, "タイムアウトになりました。");
+                this.Fail("タイムアウトになりました。");
                 return;
             }
 
@@ -71,7 +71,7 @@ namespace Credit.PointMall.Scraper.Api
                     else
                     {
                         // ログインリンク取得失敗
-                        this.Failure(this, "ログインリンクの取得に失敗しました");
+                        this.Fail("ログインリンクの取得に失敗しました");
                     }
                 }
 
@@ -88,16 +88,15 @@ namespace Credit.PointMall.Scraper.Api
             // タイムアウト
             if (isTimeout)
             {
-                this.Failure(this, "タイムアウトになりました。");
+                this.Fail("タイムアウトになりました。");
                 return;
             }
 
             var shopList = this.Document.getElementById("shop_list");
-            var html = this.Document.body.innerHTML;
 
             if (shopList == null)
             {
-                this.Failure(this, "ショップ一覧の取得に失敗しました");
+                this.Fail("ショップ一覧の取得に失敗しました");
                 return;
             }
 
@@ -209,7 +208,7 @@ namespace Credit.PointMall.Scraper.Api
             // タイムアウト
             if (isTimeout)
             {
-                this.Failure(this, "タイムアウトになりました。");
+                this.Fail("タイムアウトになりました。");
                 return;
             }
 
@@ -247,7 +246,7 @@ namespace Credit.PointMall.Scraper.Api
 
             else
             {
-                this.Failure(this, "ログインに失敗しました。");
+                this.Fail("ログインに失敗しました。");
             }
         }
 
@@ -256,7 +255,7 @@ namespace Credit.PointMall.Scraper.Api
             // タイムアウト
             if (isTimeout)
             {
-                this.Failure(this, "タイムアウトになりました。");
+                this.Fail("タイムアウトになりました。");
                 return;
             }
 

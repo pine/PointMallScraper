@@ -82,6 +82,21 @@ namespace Credit.PointMall.Scraper.Api
             return ((mshtml.IHTMLElement2)element).getElementsByTagName(tagName).ToList();
         }
 
+        public static mshtml.IHTMLElement getElementByTagName(
+            this mshtml.IHTMLElement element,
+            string tagName
+            )
+        {
+            var elements = element.getElementsByTagName(tagName);
+
+            if (elements.Count > 0)
+            {
+                return elements[0];
+            }
+
+            return null;
+        }
+
         public static void focus(this mshtml.IHTMLElement element)
         {
             ((mshtml.IHTMLElement2)element).focus();

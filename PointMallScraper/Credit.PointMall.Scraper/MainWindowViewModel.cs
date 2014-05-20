@@ -389,7 +389,7 @@ namespace Credit.PointMall.Scraper
 
             var api = this.SelectedPointMall.CreateApiInstance();
 
-            api.Failure += this.Failure;
+            api.Failed += this.Failure;
             api.LinkLengthChanged += this.LinkLengthChanged;
             api.ProgressMaxChanged += this.ProgressMaxChanged;
             api.ProgressValueChanged += this.ProgressValueChanged;

@@ -29,7 +29,7 @@ namespace Credit.PointMall.Scraper.Api
         private Timer TimeoutTimer { get; set; }
         private Timer ReadyStateTimer { get; set; }
 
-        public EventHandler<string> Failure = (o, s) => { };
+        public EventHandler<string> Failed = (o, s) => { };
         public EventHandler<int> ProgressMaxChanged = (o, v) => { };
         public EventHandler<int> ProgressValueChanged = (o, v) => { };
         public EventHandler<int> LinkLengthChanged = (o, v) => { };
@@ -165,6 +165,16 @@ namespace Credit.PointMall.Scraper.Api
             Uri uri = new Uri(url);
 
             return uri.Host;
+        }
+
+        protected void TimeoutFailure()
+        {
+            this.Fail("タイムアウトになりました。");
+        }
+
+        protected void Fail(string message)
+        {
+            this.Failed(this, message);
         }
 
         private bool CheckRedirectEnded()
